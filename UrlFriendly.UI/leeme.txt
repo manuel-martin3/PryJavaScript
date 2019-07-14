@@ -1,0 +1,18 @@
+Proyecto ControlCalidad 
+##################################
+
+
+***Instrucciones
+====================
+1. Descargar e implementar en proyecto web o desde test de java script online
+
+***Consideraciones
+====================
+1. Trae texto de prueba con una lista de caracteres contra las que compara. 
+
+
+PD. Algunos otros proyectos que puedan interesar:
+https://github.com/manuel-martin3?tab=repositories 
+
+¡¡¡ Que lo disfruten.....!!! 
+

@@ -1,0 +1,28 @@
+Hola gente!
+
+Generar su key desde el portal de marvel
+https://marvel.com/signin?referer=https%3A%2F%2Fdeveloper.marvel.com%2Faccount
+
+Your public key: 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Your private key:
+yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+
+Por último copiar y pegar en el archivo:
+"script.js"
+
+//#################################################################################
+
+PD: 
+
+1.- Crear cuenta antes de iniciar
+	https://developer.marvel.com/docs#!/public/getCreatorCollection_get_0
+
+2.- reemplazar public key donde aparecen las "x"
+    reemplazar private key donde aparecen las "y" 
+
+3.- Ruta de archivo:
+	js/script.js
+
+	

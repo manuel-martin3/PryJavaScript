@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Countries CRUD</title>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+  
+  <link href="css/table/css/jquery.bdt.css" rel="stylesheet" />
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    input[type='submit'], button, [aria-label]{
+      cursor: pointer;
+    }
+    #spoiler{
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+ 
+    <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="page-header">
+              <h1>Formulario CRUD JavaScript <small>Desarrollador</small></h1>
+            </div>
+            
+            <form action="javascript:void(0);" method="POST" onsubmit="app.Add()"> 
+                <input type="text" id="add-name" class="text" placeholder="Nuevo Elemento">  
+                <input type="submit" value="Add" class="btn btn-success">
+              </form>
+              
+              <div id="spoiler" role="aria-hidden">
+                <form action="javascript:void(0);" method="POST" id="saveEdit">
+                  <input type="text" id="edit-name">
+                  <input type="submit" value="Edit" /> <a onclick="CloseInput()" aria-label="Close">&#10006;</a>
+                </form>
+              </div>
+              
+              <p id="counter"></p>
+              
+              <table class="table table-striped" id="data-table-demo">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Accion[Editar]</th>
+                    <th>Accion[Eliminar]</th>
+                  </tr>
+                </thead>
+                  <tbody id="countries">
+                      <tr id="LoadingStatus" style="color:red"></tr>
+                  </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/table/js/jquery.bdt.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#data-table-demo').bdt({
+                showSearchForm: 1,
+                showEntriesPerPageField: 1                
+            });
+  } );
+
+
+var app = new function() {
+  
+  this.el = document.getElementById('countries');
+  this.countries = 
+  ['Alemania','Andorra'
+,'Afganistán'
+,'Angola'		
+,'Antigua y Barbuda		'
+,'Albania				'
+,'Arabia Saudita		'
+,'Argelia				'
+,'Argentina				'
+,'Armenia				'
+,'Australia				'
+,'Austria				'
+,'Azerbaiyán			'
+,'Bahamas				'
+,'Bangladés				'
+,'Barbados				'
+,'Baréin				'
+,'Bélgica				'
+,'Belice				'
+,'Benín					'
+,'Bielorrusia			'
+,'Birmania				'
+,'Bolivia				'
+,'Bosnia-Herzegovina	'
+,'Botsuana				'
+,'Brasil				'
+,'Brunéi				'
+,'Bulgaria				'
+,'Burkina Faso			'
+,'Burundi				'
+,'Bután					'
+,'Cabo Verde			'
+,'Camboya				'
+,'Camerún				'
+,'Canadá				'
+,'Catar					'
+,'Chad					'
+,'Chile					'
+,'China					'
+,'Chipre				'
+,'Colombia				'
+,'Comoras				'
+,'Congo					'
+,'Corea del Norte		'
+,'Corea del Sur			'
+,'Costa de Marfil		'
+,'Costa Rica			'
+,'Croacia				'
+,'Cuba					'
+,'Dinamarca				'
+,'Dominica				'
+,'Ecuador				'
+,'Egipto				'
+,'El Salvador			'
+,'Emiratos Árabes Unidos'
+,'Eritrea				'
+,'Eslovaquia			'
+,'Eslovenia				'
+,'España				'
+,'Estados Unidos		'
+,'Estonia				'
+,'Etiopía				'
+,'Filipinas				'
+,'Finlandia				'
+,'Fiyi					'
+,'Francia				'
+,'Gabón					'
+,'Gambia				'
+,'Georgia				'
+,'Ghana					'
+,'Granada				'
+,'Grecia				'
+,'Guatemala				'
+,'Guinea				'
+,'Guinea Ecuatorial		'
+,'Guinea-Bisáu			'
+,'Guyana				'
+,'Haití					'
+,'Honduras				'
+,'Hungría				'
+,'India					'
+,'Indonesia				'
+,'Irak					'
+,'Irán					'
+,'Irlanda				'
+,'Islandia				'
+,'Islas Marshall		'
+,'Islas Salomón			'
+,'Israel				'
+,'Italia				'
+,'Jamaica				'
+,'Japón					'
+,'Jordania				'
+,'Kazajistán			'
+,'Kenia					'
+,'Kirguistán			'
+,'Kiribati				'
+,'Kosovo				'
+,'Kuwait				'
+,'Laos					'
+,'Lesoto				'
+,'Letonia				'
+,'Líbano				'
+,'Liberia				'
+,'Libia					'
+,'Liechtenstein			'
+,'Lituania				'
+,'Luxemburgo			'
+,'Macedonia				'
+,'Madagascar			'
+,'Malasia				'
+,'Malaui				'
+,'Maldivas				'
+,'Malí					'
+,'Malta					'
+,'Marruecos				'
+,'Mauricio				'
+,'Mauritania			'
+,'México				'
+,'Micronesia			'
+,'Moldavia				'
+,'Mónaco				'
+,'Mongolia				'
+,'Montenegro			'
+,'Mozambique			'
+,'Namibia				'
+,'Nauru					'
+,'Nepal					'
+,'Nicaragua				'
+,'Níger					'
+,'Nigeria				'
+,'Noruega				'
+,'Nueva Zelanda			'
+,'Omán					'
+,'Países Bajos			'
+,'Pakistán				'
+,'Palaos				'
+,'Palestina				'
+,'Panamá				'
+,'Papúa Nueva Guinea	'
+,'Paraguay				'
+,'Perú					'
+,'Polonia				'
+,'Portugal				'
+,'Reino Unido			'
+,'República Centroafricana'
+,'República Checa'
+,'República Democrática del Congo'
+,'República Dominicana'
+,'Ruanda'
+,'Rumania'
+,'Rusia'
+,'Samoa'
+,'San Cristóbal y Nieves'
+,'San Marino'
+,'San Vicente y las Granadinas'
+,'Santa Lucía'
+,'Santo Tomé y Príncipe'
+,'Senegal'		
+,'Serbia'
+,'Seychelles'
+,'Sierra Leona'
+,'Singapur				'
+,'Siria					'
+,'Somalia				'
+,'Sri Lanka				'
+,'Suazilandia			'
+,'Sudáfrica				'
+,'Sudán					'
+,'Sudán del Sur			'
+,'Suecia				'
+,'Suiza					'
+,'Surinam				'
+,'Tailandia				'
+,'Taiwán				'
+,'Tanzania				'
+,'Tayikistán			'
+,'Timor Oriental		'
+,'Togo					'
+,'Tonga					'
+,'Trinidad y Tobago		'
+,'Túnez					'
+,'Turkmenistán			'
+,'Turquía				'
+,'Tuvalu				'
+,'Ucrania				'
+,'Uganda				'
+,'Uruguay				'
+,'Uzbekistán			'
+,'Vanuatu				'
+,'Vaticano				'
+,'Venezuela				'
+,'Vietnam				'
+,'Yemen					'
+,'Yibuti				'
+,'Zambia				'
+,'Zimbabue				'
+
+
+  ];
+  
+  this.Count = function(data) {
+    var el   = document.getElementById('counter');
+    var name = 'country';
+    if (data) {
+      if (data > 1) {
+        name = 'countries';
+        
+      }
+      el.innerHTML = data + ' ' + name ;
+    } else {
+      el.innerHTML = 'No ' + name;
+  
+    }
+    
+  };
+
+  
+
+  this.FetchAll = function() {
+    var data = '';
+    if (this.countries.length > 0) {
+      for (i = 0; i < this.countries.length; i++) {
+        data += "<tr>";
+        data += "<td>" + this.countries[i] + "</td>";
+        data += "<td><a href='#' class='btn btn-warning' onclick='app.Edit("+ i +")'><span class='glyphicon glyphicon-edit'></span></a>" + "</td>";
+        data += "<td><a href='#' class='btn btn-danger' onclick='app.Delete("+ i +")'><span class='glyphicon glyphicon-trash'></span></a>" + "</td>";
+        data += "</tr>";
+      }
+    }
+    this.Count(this.countries.length);
+    return this.el.innerHTML = data;
+  };
+  this.Add = function () {
+    el = document.getElementById('add-name');
+    // Get the value
+    var country = el.value;
+    if (country) {
+      // Add the new value
+      this.countries.push(country.trim());
+      // Reset input value
+      el.value = '';
+      // Dislay the new list
+      this.FetchAll();
+    }
+  };
+  this.Edit = function (item) {
+    var el = document.getElementById('edit-name');
+    // Display value in the field
+    el.value = this.countries[item];
+    // Display fields
+    document.getElementById('spoiler').style.display = 'block';
+    self = this;
+    document.getElementById('saveEdit').onsubmit = function() {
+      // Get value
+      var country = el.value;
+      if (country) {
+        // Edit value
+        self.countries.splice(item, 1, country.trim());
+        // Display the new list
+        self.FetchAll();
+        // Hide fields
+        CloseInput();
+      }
+    }
+  };
+  this.Delete = function (item) {
+    // Delete the current row
+    this.countries.splice(item, 1);
+    // Display the new list
+    this.FetchAll();
+  };
+  
+}
+app.FetchAll();
+function CloseInput() {
+  document.getElementById('spoiler').style.display = 'none';
+}
+</script>
+</body>
+</html>
